@@ -23,15 +23,15 @@ for pageNumber in range(1, 579):
         linkURL = item.a.get('href')
         url = requests.get('https://startup-db.com' + linkURL)
 
-        soup = BeautifulSoup(url.content, "html.parser")
+        soup2 = BeautifulSoup(url.content, "html.parser")
 
         # scrape company name
         try:
-            name = soup.find("h1", "p-name").text
+            name = soup2.find("h1", "p-name").text
             company[0] = name
 
             # scrape base information
-            baseInfoClass = soup.find(class_="p-outline__baseInfo")
+            baseInfoClass = soup2.find(class_="p-outline__baseInfo")
             baseInfos = baseInfoClass.find_all(class_='p-outline__col')
 
             for baseInfo in baseInfos:
@@ -52,7 +52,7 @@ for pageNumber in range(1, 579):
                     company[4] = foundation
 
             # Scrape Finance information
-            finances = soup.find_all(class_="p-table__area")
+            finances = soup2.find_all(class_="p-table__area")
             for finance in finances:
                 if finance.find('th', 'u-text__left').text == '合計資金調達額':
                     fundraising = finance.find('td', 'p-summary__number p-nowrap').text
